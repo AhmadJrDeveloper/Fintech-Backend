@@ -1,40 +1,46 @@
-import express from 'express';
+import  express from "express";
+import dotenv from 'dotenv'
 import cors from 'cors';
-import dotenv from 'dotenv';
-import bodyParser from 'body-parser';
+import roleRouter from './routes/roleRoute.js';
+import userRouter from './routes/userRoute.js';
 
-import { Sequelize } from 'sequelize';
-dotenv.config();
-
+dotenv.config()
 const app = express();
-app.use(bodyParser.json());
 
-// // Sequelize initialization
-// const sequelize = new Sequelize({
-//   database: 'finance',
-//   username: 'root',
-//   password: '',
-//   host: 'localhost',
-//   dialect: 'mysql'
-// });
+var corOptions = {
+  origin: 'http://localhost:80'
+}
 
-// // Function to initialize Sequelize
-// const initializeSequelize = async () => {
-//   try {
-//     await sequelize.authenticate();
-//     console.log('Connection to the database has been established successfully.');
-//   } catch (error) {
-//     console.error('Unable to connect to the database:', error);
-//   }
-// };
 
-// // IIFE (Immediately Invoked Function Expression) to use async/await
-// (async () => {
-//   await initializeSequelize();
+//middleware
+app.use(cors(corOptions));
 
-  // Your other routes or middleware can be defined here
+app.use(express.json())
 
-  // Start the server
-  app.listen(process.env.PORT, () => {
-    console.log(`Server is running on ${process.env.PORT}`);
-  });
+app.use(express.urlencoded({ extended: true}))
+
+
+//middlewear function//
+
+app.use(express.json())
+app.use((req, res, next) => {
+  console.log(req.path, req.method)
+  next()
+})
+
+//testing api
+app.get("/",(req, res) =>{
+  res.json({message:'hello from api'})
+})
+
+
+app.listen (process.env.PORT ,()=>{
+    console.log("server listening on port",process.env.PORT);
+})
+
+
+
+
+//routes
+app.use('/api/roles',roleRouter);
+app.use('/api/users',userRouter);
