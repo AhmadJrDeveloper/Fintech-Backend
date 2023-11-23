@@ -2,6 +2,8 @@ import  express from "express";
 import dotenv from 'dotenv'
 import cors from 'cors';
 import roleRouter from './routes/roleRoute.js';
+import goalRouter from './routes/goalRoute.js';
+
 
 dotenv.config()
 const app = express();
@@ -42,3 +44,4 @@ app.listen (process.env.PORT ,()=>{
 
 //routes
 app.use('/api/roles',roleRouter);
+app.use('/api/goals',goalRouter);
