@@ -1,23 +1,44 @@
 import  express from "express";
 import dotenv from 'dotenv'
-import { Sequelize } from "sequelize";
+import cors from 'cors';
+import roleRouter from './routes/roleRoute.js';
 
 dotenv.config()
 const app = express();
 
-app.listen (process.env.PORT ,()=>{
-    console.log(`server listening on port ${process.env.PORT}`);
+var corOptions = {
+  origin: 'http://localhost:82'
+}
+
+
+//middleware
+app.use(cors(corOptions));
+
+app.use(express.json())
+
+app.use(express.urlencoded({ extended: true}))
+
+
+//middlewear function//
+
+app.use(express.json())
+app.use((req, res, next) => {
+  console.log(req.path, req.method)
+  next()
 })
-const sequelize = new Sequelize('finance', 'root', '', {
-    host: 'localhost',
-    dialect:'mysql'
-  });
 
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
+//testing api
+app.get("/",(req, res) =>{
+  res.json({message:'hello from api'})
+})
 
-  
+
+app.listen (process.env.PORT ,()=>{
+    console.log("server listening on port",process.env.PORT);
+})
+
+
+
+
+//routes
+app.use('/api/roles',roleRouter);
