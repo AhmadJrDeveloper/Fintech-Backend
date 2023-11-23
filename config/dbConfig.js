@@ -4,6 +4,7 @@ export const dbConfig = {
     USER: "root",
     PASSWORD: "",
     DB: "finance",
+    PORT: 3307,
     dialect: "mysql",
     pool: {
         max: 5,
@@ -12,3 +13,4 @@ export const dbConfig = {
         idle: 10000
     }
 };
+export default dbConfig;

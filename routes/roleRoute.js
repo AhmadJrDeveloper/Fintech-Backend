@@ -1,4 +1,3 @@
-// RoleRoute.js
 import {
     addRole,
     getAllRoles,
