@@ -6,11 +6,11 @@ dotenv.config()
 const app = express();
 
 app.listen (process.env.PORT ,()=>{
-    console.log(`server listening on port  ${ process.env.PORT}`);
+    console.log(`server listening on port ${process.env.PORT}`);
 })
 const sequelize = new Sequelize('finance', 'root', '', {
     host: 'localhost',
-    dialect:  'mysql'
+    dialect:'mysql'
   });
 
   try {
