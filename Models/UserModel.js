@@ -1,4 +1,4 @@
-export const createRoleModel = (sequelize, DataTypes) => {
+export const createUserModel = (sequelize, DataTypes) => {
     const User = sequelize.define("Users", {
         id: {
             type: DataTypes.INTEGER,
@@ -21,17 +21,14 @@ export const createRoleModel = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'Roles', // This is the name of the referenced table
-                key: 'id'       // This is the name of the referenced column in the Roles table
+                model: 'Roles',
+                key: 'id',      
+                as:'role_id'
             }
         }
     }, {
         timestamps: false
     });
-
-    User.associate = (models) => {
-        User.belongsTo(models.Roles, { foreignKey: 'role_id' });
-    };
 
     return User;
 };
