@@ -3,6 +3,8 @@ import { dbConfig } from "../config/dbConfig.js";
 import { Sequelize, DataTypes } from "sequelize";
 import { createRoleModel } from './RoleModel.js';
 import { createGoalModel } from './GoalModel.js';
+import { createUserModel } from './UserModel.js';
+import { createCategoryModel } from "./CategoryModel.js";
 
 
 const sequelize = new Sequelize(
@@ -37,6 +39,21 @@ db.sequelize = sequelize;
 
 db.Roles = createRoleModel(sequelize, DataTypes);
 db.Goals = createGoalModel(sequelize, DataTypes);
+db.Users = createUserModel(sequelize, DataTypes);
+db.Categories = createCategoryModel(sequelize, DataTypes);
+
+
+
+db.Roles.hasMany = (db.Users,{
+    foreignKey:"role_id",
+    as:"user"
+})
+
+db.Users.belongTo = (db.Roles,{
+    foreignKey:"role_id"
+    ,as:"role"
+})
+
 
 
 
