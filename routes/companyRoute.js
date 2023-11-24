@@ -12,8 +12,8 @@ const router = Router();
 
 router.post('/company', addCompany);
 router.get('/company', getAllCompanies);
-router.get('/:id', getOneCompany);
-router.patch('/:id', updateCompany);
-router.delete('/:id', deleteCompany);
+router.get('/company/:id', getOneCompany);
+router.patch('/company:id', updateCompany);
+router.delete('/company/:id', deleteCompany);
 
 export default router;
