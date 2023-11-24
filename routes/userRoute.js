@@ -12,9 +12,9 @@ const router = Router();
 
 router.post('/user', addUser);
 router.get('/user', getAllUser);
-router.get('/:id', getOneUser);
-router.patch('/:id', updateUser);
-router.delete('/:id', deleteUser);
+router.get('/user/:id', getOneUser);
+router.patch('/user/:id', updateUser);
+router.delete('/user/:id', deleteUser);
 
 
 

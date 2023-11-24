@@ -11,8 +11,8 @@ const router = Router();
 
 router.post('/role', addRole);
 router.get('/role', getAllRoles);
-router.get('/:id', getOneRole);
-router.patch('/:id', updateRole);
-router.delete('/:id', deleteRole);
+router.get('/role/:id', getOneRole);
+router.patch('/role/:id', updateRole);
+router.delete('/role/:id', deleteRole);
 
 export default router;

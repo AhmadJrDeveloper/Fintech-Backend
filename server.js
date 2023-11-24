@@ -5,14 +5,14 @@ import roleRouter from './routes/roleRoute.js';
 import goalRouter from './routes/goalRoute.js';
 import userRouter from './routes/userRoute.js';
 import categoryRouter from './routes/categoryRoute.js';
-import companyRouter from './routes/companyRoute.js';
+import transactionRouter from './routes/transactionRoute.js';
 
 
 dotenv.config()
 const app = express();
 
 var corOptions = {
-  origin: 'http://localhost:80'
+  origin: 'http://localhost:82'
 }
 
 
@@ -49,4 +49,4 @@ app.use('/api/roles',roleRouter);
 app.use('/api/users',userRouter);
 app.use('/api/goals',goalRouter);
 app.use('/api/categories',categoryRouter);
-app.use('/api/companies',companyRouter);
+app.use('/api/transactions',transactionRouter);
