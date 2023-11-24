@@ -5,6 +5,7 @@ import { createRoleModel } from './RoleModel.js';
 import { createGoalModel } from './GoalModel.js';
 import { createUserModel } from './UserModel.js';
 import { createCategoryModel } from "./CategoryModel.js";
+import { createCompanyModel } from "./CompanyModel.js";
 
 
 const sequelize = new Sequelize(
@@ -41,6 +42,7 @@ db.Roles = createRoleModel(sequelize, DataTypes);
 db.Goals = createGoalModel(sequelize, DataTypes);
 db.Users = createUserModel(sequelize, DataTypes);
 db.Categories = createCategoryModel(sequelize, DataTypes);
+db.Companies = createCompanyModel(sequelize, DataTypes);
 
 
 
