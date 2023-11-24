@@ -2,6 +2,8 @@
 import { dbConfig } from "../config/dbConfig.js";
 import { Sequelize, DataTypes } from "sequelize";
 import { createRoleModel } from './RoleModel.js';
+import { createGoalModel } from './GoalModel.js';
+
 
 const sequelize = new Sequelize(
     dbConfig.DB,
@@ -36,6 +38,9 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.Roles = createRoleModel(sequelize, DataTypes);
+db.Goals = createGoalModel(sequelize, DataTypes);
+
+
 
 db.sequelize.sync({ force: false })
     .then(() => {
