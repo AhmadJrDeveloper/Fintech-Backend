@@ -3,6 +3,9 @@ import dotenv from 'dotenv'
 import cors from 'cors';
 import roleRouter from './routes/roleRoute.js';
 import goalRouter from './routes/goalRoute.js';
+import userRouter from './routes/userRoute.js';
+import categoryRouter from './routes/categoryRoute.js';
+import transactionRouter from './routes/transactionRoute.js';
 
 
 dotenv.config()
@@ -44,4 +47,7 @@ app.listen (process.env.PORT ,()=>{
 
 //routes
 app.use('/api/roles',roleRouter);
+app.use('/api/users',userRouter);
 app.use('/api/goals',goalRouter);
+app.use('/api/categories',categoryRouter);
+app.use('/api/transactions',transactionRouter);

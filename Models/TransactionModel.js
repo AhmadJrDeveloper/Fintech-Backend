@@ -1,7 +1,7 @@
 import { STRING } from "sequelize";
 
 // GoalModel.js
-export const createGoalModel = (sequelize, DataTypes) => {
+export const createTransactionModel = (sequelize, DataTypes) => {
     const Transaction = sequelize.define("Transactions", {
         id: {
             type: DataTypes.INTEGER,
@@ -12,23 +12,36 @@ export const createGoalModel = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        data:{type: DataTypes.DATA,
-                allowNull: false
-        },
-        description:{type: DataTypes.STRING,
-                    allowNull: false
-        },
-        user_id:{type: DataTypes.INTEGER,
+        data: { 
+            type: DataTypes.DATEONLY,
             allowNull: false
         },
-        category_id: {
-            type: DataTypes.ENUM('yearly', 'monthly', 'weekly'),
+        description: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        user_id: {
+            type: DataTypes.INTEGER,
             allowNull: false,
+            references:{
+                model: 'Users',
+                key: 'id',
+                as:'user_id'
+           }
+        },
+        category_id : {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references:{
+                model: 'Categories',
+                key: 'id',
+                as:'category_id'
+          }
         },
 
         transaction_type: {
             type: DataTypes.BOOLEAN,
-            allowNull: false    
+            allowNull: false ,  
         },
     },
      {

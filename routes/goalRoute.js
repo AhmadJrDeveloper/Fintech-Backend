@@ -10,10 +10,10 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.post('/addGoal', addGoal);
-router.get('/getAllGoals', getAllGoals);
-router.get('/:id', getOneGoal);
-router.patch('/:id', updateGoal);
-router.delete('/:id', deleteGoal);
+router.post('/goal', addGoal);
+router.get('/goal', getAllGoals);
+router.get('/goal/:id', getOneGoal);
+router.patch('/goal/:id', updateGoal);
+router.delete('/goal/:id', deleteGoal);
 
 export default router;
