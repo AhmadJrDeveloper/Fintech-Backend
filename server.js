@@ -5,6 +5,7 @@ import roleRouter from './routes/roleRoute.js';
 import goalRouter from './routes/goalRoute.js';
 import userRouter from './routes/userRoute.js';
 import categoryRouter from './routes/categoryRoute.js';
+import companyRouter from './routes/companyRoute.js';
 
 
 dotenv.config()
@@ -43,9 +44,9 @@ app.listen (process.env.PORT ,()=>{
 
 
 
-
 //routes
 app.use('/api/roles',roleRouter);
 app.use('/api/users',userRouter);
 app.use('/api/goals',goalRouter);
 app.use('/api/categories',categoryRouter);
+app.use('/api/companies',companyRouter);
