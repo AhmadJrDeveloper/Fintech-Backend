@@ -6,7 +6,7 @@ import { createGoalModel } from './GoalModel.js';
 import { createUserModel } from './UserModel.js';
 import { createCategoryModel } from "./CategoryModel.js";
 import { createTransactionModel } from "./TransactionModel.js"
-
+import { createCompanyModel } from "./CompanyModel.js";
 
 const sequelize = new Sequelize(
     dbConfig.DB,
@@ -45,7 +45,7 @@ db.Goals = createGoalModel(sequelize, DataTypes);
 db.Users = createUserModel(sequelize, DataTypes);
 db.Categories = createCategoryModel(sequelize, DataTypes);
 db.Transactions = createTransactionModel(sequelize, DataTypes)
-
+db.Companies = createCompanyModel(sequelize, DataTypes)
 
 db.Roles.hasMany(db.Users, {
     foreignKey: "role_id",
