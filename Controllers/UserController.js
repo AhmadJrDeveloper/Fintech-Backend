@@ -82,9 +82,11 @@ const deleteUser = async (req, res) => {
 const login = async (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
+ 
   const user = await User.findOne({ where: { username: username } });
-
-  if (!username || !(await User.comparePassword(password, user.password))) {
+  
+  
+  if (!user || !(await User.comparePassword(password, user.password))) {
     const error = res
       .status(401)
       .json({ message: "please enter a correct username or password" });
