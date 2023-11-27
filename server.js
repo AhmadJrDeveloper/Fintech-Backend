@@ -6,13 +6,13 @@ import goalRouter from './routes/goalRoute.js';
 import userRouter from './routes/userRoute.js';
 import categoryRouter from './routes/categoryRoute.js';
 import transactionRouter from './routes/transactionRoute.js';
-
+import companyRouter from './routes/companyRoute.js'
 
 dotenv.config()
 const app = express();
 
 var corOptions = {
-  origin: 'http://localhost:82'
+  origin: 'http://localhost:80'
 }
 
 
@@ -50,3 +50,4 @@ app.use('/api/users',userRouter);
 app.use('/api/goals',goalRouter);
 app.use('/api/categories',categoryRouter);
 app.use('/api/transactions',transactionRouter);
+app.use('/api/companies',companyRouter);

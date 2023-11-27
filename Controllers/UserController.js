@@ -1,6 +1,7 @@
 // UserController.js
 import { db } from "../Models/index.js";
 import bcrypt from 'bcrypt';
+import  jwt from 'jasonwebtoken';
 const User = db.Users;
 
 
@@ -31,13 +32,11 @@ const addUser = async (req, res) => {
 // 2. get all Users
 const getAllUser = async (req, res) => {
     try {
-        // Fetch all users with associated roles
-        let users = await User.User.findAll({
-            include: [{
-                model: Role, // Assuming your model is named Roles
-                attributes: ['name'], // Specify the attributes you want to include from the Roles model
-                as: 'role' // Alias for the included Roles model
-            }]
+        // Fetch all users
+        let users = await User.findAll({
+             include: [
+            { model: db.Roles, as: "role" }
+            ],
         });
 
         // Check if there are no users
@@ -58,7 +57,12 @@ const getAllUser = async (req, res) => {
 // 3. get single User
 const getOneUser = async (req, res) => {
     let id = req.params.id;
-    let user = await User.findOne({ where: { id: id } });
+    let user = await User.findOne({
+        where: { id: id },
+        include: [
+            { model: db.Roles, as: "role" },
+        ],
+     });
     res.status(200).send(user);
 }
 
