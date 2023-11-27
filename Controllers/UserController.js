@@ -44,7 +44,11 @@ const addUser = async (req, res) => {
 const getAllUser = async (req, res) => {
     try {
         // Fetch all users
-        let users = await User.findAll({});
+        let users = await User.findAll({
+             include: [
+            { model: db.Roles, as: "role" }
+            ],
+        });
 
         // Check if there are no users
         if (users.length === 0) {
@@ -63,7 +67,12 @@ const getAllUser = async (req, res) => {
 // 3. get single User
 const getOneUser = async (req, res) => {
     let id = req.params.id;
-    let user = await User.findOne({ where: { id: id } });
+    let user = await User.findOne({
+        where: { id: id },
+        include: [
+            { model: db.Roles, as: "role" },
+        ],
+     });
     res.status(200).send(user);
 }
 

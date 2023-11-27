@@ -6,7 +6,7 @@ import { createGoalModel } from './GoalModel.js';
 import { createUserModel } from './UserModel.js';
 import { createCategoryModel } from "./CategoryModel.js";
 import { createTransactionModel } from "./TransactionModel.js"
-
+import { createCompanyModel } from "./CompanyModel.js";
 
 const sequelize = new Sequelize(
     dbConfig.DB,
@@ -45,36 +45,38 @@ db.Goals = createGoalModel(sequelize, DataTypes);
 db.Users = createUserModel(sequelize, DataTypes);
 db.Categories = createCategoryModel(sequelize, DataTypes);
 db.Transactions = createTransactionModel(sequelize, DataTypes)
+db.Companies = createCompanyModel(sequelize, DataTypes)
 
+db.Roles.hasMany(db.Users, {
+    foreignKey: "role_id",
+    as: "user"
+});
 
-db.Roles.hasMany = (db.Users,{
-    foreignKey:"role_id",
-    as:"user"
-})
+db.Users.belongsTo(db.Roles, {
+    foreignKey: "role_id",
+    as: "role"
+});
 
-db.Users.belongTo = (db.Roles,{
-    foreignKey:"role_id",
-    as:"role"
-})
+db.Categories.hasMany(db.Transactions, {
+    foreignKey: "category_id",
+    as: "transaction"
+});
 
-db.Categories.hasMany = (db.Transactions,{
-    foreignKey:"category_id"
-    ,as:"category"
-})
-db.Transactions.belongTo = (db.Categories,{
-    foreignKey:"category_id",
-    as:"category"
-})
+db.Transactions.belongsTo(db.Categories, {
+    foreignKey: "category_id",
+    as: "category"
+});
 
+db.Users.hasMany(db.Transactions, {
+    foreignKey: "user_id",
+    as: "transaction"
+});
 
-db.Users.hasMany = (db.Transactions,{
-    foreignKey:"user_id"
-    ,as:"user"
-})
-db.Transactions.belongTo = (db.Users,{
-    foreignKey:"user_id",
-    as:"user"
-})
+db.Transactions.belongsTo(db.Users, {
+    foreignKey: "user_id",
+    as: "user"
+});
+
 
 
 
@@ -83,4 +85,4 @@ db.sequelize.sync({ force: false })
         console.log("Database synchronization done!");
     });
 
-export { db };
+export { db,};
