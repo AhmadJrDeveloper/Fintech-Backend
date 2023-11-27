@@ -1,7 +1,11 @@
 // UserController.js
 import { db } from "../Models/index.js";
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 const User = db.Users;
+import dotenv from 'dotenv'
+dotenv.config()
+
 
 
 
@@ -19,7 +23,15 @@ const addUser = async (req, res) => {
         info.password = hashedPassword;
   
         const user = await User.create(info);
-        res.status(200).send(user);
+        const token=jwt.sign({id: user.id},process.env.SECRET_STRING,{
+        expiresIn:process.env.LOGIN_EXPIRES
+        })
+        res.status(200).json({
+            status: 'success',
+            token: token,
+            data: user
+        })
+    
     } catch (error) {
         console.error("Error creating User:", error);
         res.status(500).send(error.message);
@@ -69,10 +81,28 @@ const deleteUser = async (req, res) => {
     res.status(200).send('User deleted');
 }
 
+const login = async (req, res,next) => {
+    const username = req.body.username
+    const password = req.body.password
+    const user = await User.findOne({ where: { username: username}})
+
+
+    if (!username || ! await User.comparePassword(password,user.password)){
+       const error= res.status(401).json({ message:'please enter a username and password' });
+        return next (error)
+    }
+    const token=jwt.sign({id: user.id},process.env.SECRET_STRING,{
+        expiresIn:process.env.LOGIN_EXPIRES
+        })
+    res.status(200).json({ message: 'success',token:token})
+
+
+}
 export {
     addUser,
     getAllUser ,
     getOneUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    login
 };

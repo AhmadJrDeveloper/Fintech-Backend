@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt"
 export const createUserModel = (sequelize, DataTypes) => {
     const User = sequelize.define("Users", {
         id: {
@@ -29,6 +30,7 @@ export const createUserModel = (sequelize, DataTypes) => {
     }, {
         timestamps: false
     });
-
+    User.comparePassword = async function (pass,passdb) {
+        return await bcrypt.compare(pass,passdb)      };
     return User;
 };
