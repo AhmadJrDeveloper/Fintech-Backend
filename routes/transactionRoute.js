@@ -7,14 +7,14 @@ import {
     deleteTransaction
 } from '../Controllers/TransactionController.js';
 import { Router } from 'express';
-
+import { verifyAccountant, verifyToken } from '../middelware/auth.js';
 const router = Router();
 
-router.post('/transaction', addTransaction);
-router.get('/transaction', getAllTransaction);
-router.get('/transaction/:id', getOneTransaction);
-router.patch('/transaction/:id', updateTransaction);
-router.delete('/transaction/:id', deleteTransaction);
+router.post('/transaction', verifyAccountant,addTransaction);
+router.get('/transaction',verifyToken, getAllTransaction);
+router.get('/transaction/:id',verifyToken, getOneTransaction);
+router.patch('/transaction/:id',verifyAccountant, updateTransaction);
+router.delete('/transaction/:id', verifyAccountant,deleteTransaction);
 
 
 

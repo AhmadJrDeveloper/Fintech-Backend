@@ -7,7 +7,8 @@ import userRouter from './routes/userRoute.js';
 import categoryRouter from './routes/categoryRoute.js';
 import transactionRouter from './routes/transactionRoute.js';
 import companyRouter from './routes/companyRoute.js'
-import { verifyToken } from './middelware/auth.js'
+import {  verifyadmin,verifyAccountant,verifyFinancialManager } from './middelware/auth.js'
+
 dotenv.config()
 const app = express();
 
@@ -45,9 +46,9 @@ app.listen (process.env.PORT ,()=>{
 
 
 //routes
-app.use('/api/roles',verifyToken,roleRouter);
+app.use('/api/roles',roleRouter);
 app.use('/api/users',userRouter);
-app.use('/api/goals',verifyToken,goalRouter);
-app.use('/api/categories',verifyToken,categoryRouter);
-app.use('/api/transactions',verifyToken,transactionRouter);
-app.use('/api/companies',verifyToken,companyRouter);
+app.use('/api/goals',goalRouter);
+app.use('/api/categories',categoryRouter);
+app.use('/api/transactions',transactionRouter);
+app.use('/api/companies',verifyadmin,companyRouter);
