@@ -10,7 +10,7 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.post('/category', addCategory);
+router.post('/category',[], addCategory);
 router.get('/category', getAllCategories);
 router.get('/category/:id', getOneCategory);
 router.patch('/category/:id', updateCategory);

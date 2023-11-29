@@ -6,13 +6,13 @@ import {
     deleteRole
 } from '../Controllers/RoleController.js';
 import { Router } from 'express';
-
+import { verifyToken ,verifyadmin } from '../middelware/auth.js';
 const router = Router();
 
-router.post('/role', addRole);
-router.get('/role', getAllRoles);
-router.get('/role/:id', getOneRole);
-router.patch('/role/:id', updateRole);
-router.delete('/role/:id', deleteRole);
+router.post('/role',verifyToken, addRole);
+router.get('/role',verifyadmin, getAllRoles);
+router.get('/role/:id',verifyToken, getOneRole);
+router.patch('/role/:id',verifyadmin, updateRole);
+router.delete('/role/:id',verifyadmin, deleteRole);
 
 export default router;

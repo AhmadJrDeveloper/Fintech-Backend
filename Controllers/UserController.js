@@ -82,15 +82,17 @@ const deleteUser = async (req, res) => {
 const login = async (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
-  const user = await User.findOne({ where: { username: username } });
-
-  if (!username || !(await User.comparePassword(password, user.password))) {
+ 
+  const user = await User.findOne({ where: { username: username } ,  include: [{ model: db.Roles, as: 'role' }]});
+  
+  
+  if (!user || !(await User.comparePassword(password, user.password))) {
     const error = res
       .status(401)
       .json({ message: "please enter a correct username or password" });
     return next(error);
   }
-  const token = jwt.sign({ id: user.id }, process.env.SECRET_STRING, {
+  const token = jwt.sign({ id: user.id, role:user.role.name}, process.env.SECRET_STRING, {
     expiresIn: process.env.LOGIN_EXPIRES,
   });
   res.status(200).json({ message: "success", token });
