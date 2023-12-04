@@ -13,8 +13,10 @@ dotenv.config()
 const app = express();
 
 var corOptions = {
-  origin: 'http://localhost:80'
+  origin: 'http://localhost:5173'
 }
+
+
 
 
 //middleware

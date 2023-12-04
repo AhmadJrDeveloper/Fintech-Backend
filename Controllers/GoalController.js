@@ -16,7 +16,7 @@ const addGoal = async (req, res) => {
     };
     
     try {
-        if (!['weekly', 'montly', 'yearly'].includes(req.body.type)) {
+        if (!['weekly', 'monthly', 'yearly'].includes(req.body.type)) {
             return res.status(400).json({ error: 'Invalid goal value' });
           }
       
@@ -24,7 +24,7 @@ const addGoal = async (req, res) => {
         res.status(200).send(goal);
     } catch (error) {
         console.error("Error creating goal:", error);
-        res.status(500).send("Internal Server Error");
+        res.status(500).send(error.message);
     }
 };
 
